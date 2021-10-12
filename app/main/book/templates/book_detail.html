@@ -1,0 +1,67 @@
+{%- extends "base.html" -%}
+{%- from "bootstrap/pagination.html" import render_pagination -%}
+{%- import "bootstrap/wtf.html" as wtf -%}
+{%- block mycontent -%}
+    <div class="well well-lg">
+
+        <h1 class="page-header animated fadeInLeft">{{ book.title }}
+            <br>
+            {%- if book.subtitle -%}
+                <small>{{ book.subtitle }}</small>
+            {%- endif -%}
+        </h1>
+        <div class="primary-info">
+            {%- if book.image -%}
+<!--                <img class="img-responsive" src="{{ book.image }}" alt="{{ book.title~' 封面' }}">-->
+                {%- if book.image == "1.jpg" -%}
+                <img class="img-responsive" src="{{ url_for('static', filename='1.jpg') }}" alt="{{ book.title~' ' }}">
+                {%- endif -%}
+                {%- if book.image == "2.jpg" -%}
+                <img class="img-responsive" src="{{ url_for('static', filename='2.jpg') }}" alt="{{ book.title~' ' }}">
+                {%- endif -%}
+                {%- if book.image == "3.jpg" -%}
+                <img class="img-responsive" src="{{ url_for('static', filename='3.jpg') }}" alt="{{ book.title~' ' }}">
+                {%- endif -%}
+                {%- if book.image == "4.jpg" -%}
+                <img class="img-responsive" src="{{ url_for('static', filename='4.jpg') }}" alt="{{ book.title~' ' }}">
+                {%- endif -%}
+                {%- if book.image == "5.jpg" -%}
+                <img class="img-responsive" src="{{ url_for('static', filename='5.jpg') }}" alt="{{ book.title~' ' }}">
+                {%- endif -%}
+            {%- endif -%}
+            <ul class="list-group">
+                <li class="list-group-item">ISBN: {{ book.isbn }}</li>
+                {%- if book.author -%}
+                    <li class="list-group-item">Author: {{ book.author }}</li>
+                {%- endif -%}
+
+
+            </ul>
+        </div>
+        <br>
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#summary"
+                           aria-expanded="true" aria-controls="collapseOne">
+                            Content
+                        </a>
+                    </h4>
+                </div>
+                <div id="summary" class="panel-collapse collapse in" role="tabpanel"
+                     aria-labelledby="headingOne">
+                    <div class="panel-body">
+                        {%- if book.summary_html -%}
+                            {{ book.summary_html|safe }}
+                        {%- else -%}
+                            {{ book.summary }}
+                        {%- endif -%}
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+{%- endblock -%}
